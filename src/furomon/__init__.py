@@ -1,6 +1,6 @@
 """A clean customisable Sphinx documentation theme."""
 
-__version__ = "2022.1"
+__version__ = "2022.1.1"
 
 import hashlib
 import logging
@@ -21,7 +21,7 @@ from sphinx.transforms.post_transforms import SphinxPostTransform
 
 from .navigation import get_navigation_tree
 
-THEME_PATH = (Path(__file__).parent / "theme" / "furo").resolve()
+THEME_PATH = (Path(__file__).parent / "theme" / "furomon").resolve()
 
 logger = logging.getLogger(__name__)
 
@@ -174,7 +174,7 @@ def _html_page_context(
     assert isinstance(app.builder, StandaloneHTMLBuilder)
 
     if "css_files" in context:
-        if "_static/styles/furo.css" not in context["css_files"]:
+        if "_static/styles/furomon.css" not in context["css_files"]:
             raise Exception(
                 "This documentation is not using `furo.css` as the stylesheet. "
                 "If you have set `html_style` in your conf.py file, remove it."
@@ -182,12 +182,12 @@ def _html_page_context(
 
         _add_asset_hashes(
             context["css_files"],
-            ["styles/furo.css", "styles/furo-extensions.css"],
+            ["styles/furomon.css", "styles/furo-extensions.css"],
         )
     if "scripts" in context:
         _add_asset_hashes(
             context["scripts"],
-            ["scripts/furo.js"],
+            ["scripts/furomon.js"],
         )
 
     # Basic constants
@@ -219,9 +219,9 @@ def _html_page_context(
 
 
 def _builder_inited(app: sphinx.application.Sphinx) -> None:
-    if app.config.html_theme != "furo":
+    if app.config.html_theme != "furomon":
         return
-    if "furo" in app.config.extensions:
+    if "furomon" in app.config.extensions:
         raise Exception(
             "Did you list 'furo' in the `extensions` in conf.py? "
             "If so, please remove it. Furo does not work with non-HTML builders "
@@ -235,7 +235,7 @@ def _builder_inited(app: sphinx.application.Sphinx) -> None:
         )
 
     # Our JS file needs to be loaded as soon as possible.
-    app.add_js_file("scripts/furo.js", priority=200)
+    app.add_js_file("scripts/furomon.js", priority=200)
 
     # 500 is the default priority for extensions, we want this after this.
     app.add_css_file("styles/furo-extensions.css", priority=600)
