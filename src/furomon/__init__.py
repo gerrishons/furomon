@@ -1,6 +1,6 @@
 """A clean customisable Sphinx documentation theme."""
 
-__version__ = "2022.1.1"
+__version__ = "2022.1.2"
 
 import hashlib
 import logging
@@ -168,7 +168,7 @@ def _html_page_context(
     context: Dict[str, Any],
     doctree: Any,
 ) -> None:
-    if app.config.html_theme != "furo":
+    if app.config.html_theme != "furomon":
         return
 
     assert isinstance(app.builder, StandaloneHTMLBuilder)
